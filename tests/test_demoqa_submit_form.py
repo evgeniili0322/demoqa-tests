@@ -35,17 +35,4 @@ def test_successful_submit():
     )
 
     # Assert
-    registration_page.should_have_registered(
-        student.first_name,
-        student.last_name,
-        student.email,
-        student.gender,
-        student.phone_number,
-        student.date_of_birth,
-        student.subject,
-        student.hobby,
-        student.picture,
-        student.current_address,
-        student.state,
-        student.city
-    )
+    registration_page.should_have_registered(student)

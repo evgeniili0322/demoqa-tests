@@ -64,17 +64,16 @@ class RegistrationPage:
     def submit(self):
         browser.element('#submit').click()
 
-    def should_have_registered(self, first_name, last_name, email, gender, phone_number, date_of_birth, subject,
-                               hobby, picture, current_address, state, city):
-        browser.element('table').all('td').even.should(have.exact_texts(
-            f'{first_name} {last_name}',
-            email,
-            gender,
-            phone_number,
-            f'{date_of_birth["day"]} {date_of_birth["month"]},{date_of_birth["year"]}',
-            subject,
-            hobby,
-            os.path.basename(picture),
-            current_address,
-            f'{state} {city}'
+    def should_have_registered(self, user):
+        browser.element('.table').should(be.visible).all('td').even.should(have.exact_texts(
+            f'{user.first_name} {user.last_name}',
+            user.email,
+            user.gender,
+            user.phone_number,
+            f'{user.date_of_birth["day"]} {user.date_of_birth["month"]},{user.date_of_birth["year"]}',
+            user.subject,
+            user.hobby,
+            os.path.basename(user.picture),
+            user.current_address,
+            f'{user.state} {user.city}'
         ))
