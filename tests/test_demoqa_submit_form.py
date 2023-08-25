@@ -10,8 +10,7 @@ def test_successful_submit():
     registration_page = RegistrationPage()
 
     student = User('Evgenii', 'Li', 'testacc@rambler.ru', 'Male', '7999888776',
-                   dict(month='March', day=22, year=1999),
-                      'Maths', 'Music', picture_path, 'Odesskaya, bld. 24, appt. 23', 'NCR', 'Gurgaon')
+                   dict(month='March', day=22, year=1999),'Maths', 'Music', picture_path, 'Odesskaya, bld. 24, appt. 23', 'NCR', 'Gurgaon')
 
     registration_page.open()
 
