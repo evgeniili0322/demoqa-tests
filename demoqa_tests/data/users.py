@@ -2,7 +2,7 @@ import dataclasses
 
 
 @dataclasses.dataclass
-class Student:
+class User:
     first_name: str
     last_name: str
     email: str
