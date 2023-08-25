@@ -64,6 +64,28 @@ class RegistrationPage:
     def submit(self):
         browser.element('#submit').click()
 
+    def register_user(self, user):
+        (
+            self
+            .fill_first_name(user.first_name)
+            .fill_last_name(user.last_name)
+            .fill_user_email(user.email)
+            .pick_gender(user.gender)
+            .fill_user_phone_number(user.phone_number)
+            .fill_date_of_birth(user.date_of_birth)
+
+            .fill_subject(user.subject)
+            .pick_hobby(user.hobby)
+
+            .upload_picture(user.picture)
+
+            .fill_current_address(user.current_address)
+            .fill_state(user.state)
+            .fill_city(user.city)
+
+            .submit()
+        )
+
     def should_have_registered(self, user):
         browser.element('.table').should(be.visible).all('td').even.should(have.exact_texts(
             f'{user.first_name} {user.last_name}',

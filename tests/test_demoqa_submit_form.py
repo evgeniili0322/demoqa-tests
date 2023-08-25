@@ -13,26 +13,7 @@ def test_successful_submit():
     registration_page.open()
 
     # Act
-    (
-        registration_page
-        .fill_first_name(student.first_name)
-        .fill_last_name(student.last_name)
-        .fill_user_email(student.email)
-        .pick_gender(student.gender)
-        .fill_user_phone_number(student.phone_number)
-        .fill_date_of_birth(student.date_of_birth)
-
-        .fill_subject(student.subject)
-        .pick_hobby(student.hobby)
-
-        .upload_picture(student.picture)
-
-        .fill_current_address(student.current_address)
-        .fill_state(student.state)
-        .fill_city(student.city)
-
-        .submit()
-    )
+    registration_page.register_user(student)
 
     # Assert
     registration_page.should_have_registered(student)
