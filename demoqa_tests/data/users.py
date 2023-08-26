@@ -1,4 +1,12 @@
 import dataclasses
+from datetime import datetime
+from enum import Enum
+
+
+class Gender(Enum):
+    male = 'Male'
+    female = 'Female'
+    other = 'Other'
 
 
 @dataclasses.dataclass
@@ -6,9 +14,9 @@ class User:
     first_name: str
     last_name: str
     email: str
-    gender: str
+    gender: Gender
     phone_number: str
-    date_of_birth: {}
+    date_of_birth: datetime
     subject: str
     hobby: str
     picture: str
