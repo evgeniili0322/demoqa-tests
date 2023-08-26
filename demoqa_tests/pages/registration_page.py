@@ -20,7 +20,7 @@ class RegistrationPage:
         return self
 
     def pick_gender(self, value):
-        browser.element(f'[value={value}] +label').click()
+        browser.element(f'[value={value}] + label').click()
         return self
 
     def fill_user_phone_number(self, value):
@@ -30,11 +30,11 @@ class RegistrationPage:
     def fill_date_of_birth(self, value):
         browser.element('#dateOfBirthInput').click()
         browser.element('.react-datepicker__month-select').click()
-        browser.element('.react-datepicker__month-select').element(by.text(value['month'])).click()
+        browser.element('.react-datepicker__month-select').element(by.text(value.strftime("%B"))).click()
         browser.element('.react-datepicker__year-select').click()
-        (browser.element('.react-datepicker__year-select').element(f'[value="{value["year"]}"]')
+        (browser.element('.react-datepicker__year-select').element(f'[value="{value.year}"]')
             .perform(command.js.scroll_into_view).click())
-        browser.element(f'.react-datepicker__day--0{value["day"]}').click()
+        browser.element(f'.react-datepicker__day--0{value.day}').click()
         return self
 
     def fill_subject(self, value):
@@ -71,7 +71,7 @@ class RegistrationPage:
             email,
             gender,
             phone_number,
-            f'{date_of_birth["day"]} {date_of_birth["month"]},{date_of_birth["year"]}',
+            f'{date_of_birth.day} {date_of_birth.strftime("%B")},{date_of_birth.year}',
             subject,
             hobby,
             os.path.basename(picture),
