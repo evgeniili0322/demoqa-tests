@@ -1,4 +1,5 @@
 import os
+
 from demoqa_tests.pages.registration_page import RegistrationPage
 from demoqa_tests.data.users import User, Gender
 from datetime import datetime
