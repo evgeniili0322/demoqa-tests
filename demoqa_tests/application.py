@@ -1,3 +1,5 @@
+import allure
+
 from selene import browser
 
 from demoqa_tests.components.panel import Panel
@@ -11,6 +13,7 @@ class Application:
         self.registrations_page = RegistrationPage()
         self.simple_registration_page = SimpleRegistrationPage()
 
+    @allure.step('Open main page')
     def open(self):
         browser.open('/elements')
 

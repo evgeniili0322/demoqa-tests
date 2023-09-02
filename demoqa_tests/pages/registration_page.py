@@ -1,9 +1,11 @@
 import os.path
+import allure
 
 from selene import browser, be, by, command, have
 
 
 class RegistrationPage:
+    @allure.step('Open registration page')
     def open(self):
         browser.open('/automation-practice-form')
 
@@ -64,6 +66,7 @@ class RegistrationPage:
     def submit(self):
         browser.element('#submit').click()
 
+    @allure.step('Register user')
     def register_user(self, user):
         (
             self
@@ -86,6 +89,7 @@ class RegistrationPage:
             .submit()
         )
 
+    @allure.step('Assert registered user')
     def should_have_registered(self, user):
         browser.element('.table').should(be.visible).all('td').even.should(have.exact_texts(
             f'{user.first_name} {user.last_name}',

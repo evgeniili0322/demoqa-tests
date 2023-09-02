@@ -1,8 +1,18 @@
+import allure
+
+from allure_commons.types import Severity
+
 from demoqa_tests.application import app
 from demoqa_tests.data.users import SimpleUser
 
 
-def test_successful_submit():
+@allure.tag('Web')
+@allure.severity(Severity.CRITICAL)
+@allure.label('owner', 'Evgenii Li')
+@allure.feature('Simple registration from')
+@allure.story('Assert registered user')
+@allure.link('https://demoqa.com/text-box')
+def test_successful_registration():
     # Arrange
     user = SimpleUser('Evgenii Li', 'testacc@rambler.ru', 'Odesskaya, bld. 24, appt. 23'
                       , 'G. Orekhovo-Zuevo Ul.uritskogo, bld. 66, appt. 24')
