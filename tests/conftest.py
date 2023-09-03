@@ -1,5 +1,7 @@
+import os
 import pytest
 
+from dotenv import load_dotenv
 from selenium import webdriver
 from selene import browser
 
@@ -9,26 +11,45 @@ from demoqa_tests.utils import attach
 options = webdriver.ChromeOptions()
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        '--browser_url'
+    )
+
+
+@pytest.fixture(scope='session', autouse=True)
+def load_env():
+    load_dotenv()
+
+
 @pytest.fixture(scope='function', autouse=True)
 def browser_opt(request):
-    browser_version = "100.0"
-    selenoid_capabilities = {
-        "browserName": "chrome",
-        "browserVersion": browser_version,
-        "selenoid:options": {
-            "enableVNC": True,
-            "enableVideo": True
-        }
-    }
-
-    options.capabilities.update(selenoid_capabilities)
     options.add_argument('window-size=2560,1440')
-
-    browser.config.driver = webdriver.Remote(
-        'https://user1:1234@selenoid.autotests.cloud/wd/hub',
-        options=options
-    )
     browser.config.base_url = 'https://demoqa.com'
+
+    browser_url = request.config.getoption('--browser_url')
+
+    if browser_url is not None:
+        login = os.getenv('LOGIN')
+        password = os.getenv('PASSWORD')
+
+        selenoid_capabilities = {
+            "browserName": "chrome",
+            "browserVersion": '100.0',
+            "selenoid:options": {
+                "enableVNC": True,
+                "enableVideo": True
+            }
+        }
+
+        options.capabilities.update(selenoid_capabilities)
+
+        browser.config.driver = webdriver.Remote(
+            command_executor=f'{browser_url}',
+            options=options
+        )
+    else:
+        browser.config.driver_options = options
 
     yield browser
 
