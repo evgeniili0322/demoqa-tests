@@ -45,7 +45,7 @@ def browser_opt(request):
         options.capabilities.update(selenoid_capabilities)
 
         browser.config.driver = webdriver.Remote(
-            command_executor=f'{browser_url}',
+            command_executor=f'https://{login}:{password}@{browser_url}',
             options=options
         )
     else:
